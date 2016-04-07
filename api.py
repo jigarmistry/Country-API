@@ -9,12 +9,17 @@ app.debug = True
 def find_images(country_name):
     all_png = glob.glob(os.path.join("static/png/*.png"))
     country_name_with_underscore = country_name.replace(" ","-")
+
     country_png = []
     for png  in all_png:
         if country_name in png:
             country_png.append(png)
         elif country_name_with_underscore in png :
             country_png.append(png)
+
+    if len(country_png) == 0:
+        country_png.append("static/png/No-Flag-128.png")
+        country_png.append("static/png/No-Flag-256.png")
 
     dict_country_png = {}
     arr_country_png = []
